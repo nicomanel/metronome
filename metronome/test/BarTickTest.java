@@ -1,13 +1,11 @@
 package metronome.test;
 
 import metronome.BarTick;
-import metronome.EigthNote;
-import metronome.QuarterNote;
+import metronome.rythms.EigthNote;
+import metronome.rythms.QuarterNote;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by nico on 17/10/2016 for ${PROJET_NAME}
@@ -30,9 +28,9 @@ public class BarTickTest {
     @Test
     public void isCompleteWith2QuarterNote()
     {
+        barTickTobeTested.addRythm(new EigthNote());
         barTickTobeTested.addRythm(new QuarterNote());
-        barTickTobeTested.addRythm(new QuarterNote());
-        Assert.assertEquals(barTickTobeTested.isComplete(), false);
+        Assert.assertFalse(barTickTobeTested.isComplete());
     }
 
     @Test
@@ -44,17 +42,21 @@ public class BarTickTest {
 
     @Test
     public void addRythmWhenAlreadyComplete() throws Exception {
-
+        barTickTobeTested.addRythm(new QuarterNote());
+        Assert.assertFalse(barTickTobeTested.addRythm(new QuarterNote()));
     }
 
     @Test
-    public void addRythmWhenNotyComplete() throws Exception {
-
+    public void addRythmWhenNotComplete() throws Exception {
+        Assert.assertTrue(barTickTobeTested.addRythm(new QuarterNote()));
     }
 
     @Test
     public void computeCommonDiviser() throws Exception {
-
+        barTickTobeTested.addRythm(new EigthNote());
+        Assert.assertEquals(barTickTobeTested.computeCommonDiviser(), 2);
+        barTickTobeTested.addRythm(new QuarterNote());
+        Assert.assertEquals(barTickTobeTested.computeCommonDiviser(), 2);
     }
 
     @Before

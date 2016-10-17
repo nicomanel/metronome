@@ -1,4 +1,4 @@
-package metronome;
+package metronome.rythms;
 
 import metronome.Note;
 

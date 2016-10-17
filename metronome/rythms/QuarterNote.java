@@ -1,4 +1,6 @@
-package metronome;
+package metronome.rythms;
+
+import metronome.Note;
 
 public class QuarterNote extends Note {
 

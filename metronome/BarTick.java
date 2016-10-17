@@ -30,8 +30,11 @@ public class BarTick {
 
     public boolean addRythm(AbstractRythm aNewRythm)
     {
-        rythms.add(aNewRythm);
-        return true;
+        if (!isComplete()) {
+            rythms.add(aNewRythm);
+            return true;
+        }
+        return false;
     }
 
     public int computeCommonDiviser()
@@ -41,9 +44,10 @@ public class BarTick {
         for(AbstractRythm rythm : rythms)
         {
             int diviser = rythm.getTimeDivision();
-            if (knownDiviser.contains(diviser))
+            if (!knownDiviser.contains(diviser))
             {
                 commonDiviser *= diviser;
+                knownDiviser.add(diviser);
             }
         }
         return commonDiviser;
